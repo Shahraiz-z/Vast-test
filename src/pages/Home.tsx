@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Eye, X, ChevronRight, ChevronLeft } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { translations } from '@/translations';
 
 interface ShowcaseItem {
   src: string;
@@ -140,7 +139,6 @@ const bottomCards = [
 
 export default function Home() {
   const { language, dir } = useLanguage();
-  const t = translations[language];
   const isAr = language === 'ar';
 
   const [selectedImage, setSelectedImage] = useState<ShowcaseItem | null>(null);
