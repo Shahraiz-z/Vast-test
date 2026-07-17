@@ -35,14 +35,6 @@ export default function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
-  const toggleSection = (title: string) => {
-    setExpandedSections(prev => 
-      prev.includes(title) 
-        ? prev.filter(s => s !== title)
-        : [...prev, title]
-    );
-  };
-
   // Same nav links as before - no changes to buttons
   const navLinks = [
     { path: '/', label: t.nav.home },
