@@ -41,7 +41,7 @@ const pdfCatalogues: PdfItem[] = [
  nameAr: 'كتالوج الخزائن',
  description: 'Complete cabinet designs & specifications',
  descriptionAr: 'تصاميم ومواصفات الخزائن الكاملة',
- path: '/pdf/Cabinet Catalog New.pdf',
+ path: 'https://drive.google.com/file/d/1WE_S8auHHqL1qCKjWg6erfjbffTaQifl/preview',
  },
  {
  id: 2,
@@ -49,7 +49,7 @@ const pdfCatalogues: PdfItem[] = [
  nameAr: 'كتالوج الدواليب',
  description: 'Wardrobe & closet solutions guide',
  descriptionAr: 'دليل حلول الخزائن والدواليب',
- path: '/pdf/Closet Catalog New.pdf',
+ path: 'https://drive.google.com/file/d/1xgKuZ8C38ZH1qwDFasWN94HjNPiGuvrY/preview',
  },
 ];
 
@@ -61,6 +61,7 @@ export default function Catalog() {
  const [selectedImage, setSelectedImage] = useState<CatalogItem | null>(null);
  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
  const [selectedPdf, setSelectedPdf] = useState<PdfItem | null>(null);
+ 
 
  const categories = [
  { key: 'all', label: t.catalog.categories.all },
@@ -72,20 +73,28 @@ export default function Catalog() {
  ? catalogItems
  : catalogItems.filter(item => item.category === activeCategory);
 
+ 
+
+ 
+
+ const handleDownload = (pdf: PdfItem) => {
+ // For Google Drive: use export/download URL
+ // Replace 'preview' with 'uc?export=download' for direct download
+ const downloadUrl = pdf.path.replace('/preview', '/uc?export=download');
+ const link = document.createElement('a');
+ link.href = downloadUrl;
+ link.download = pdf.name + '.pdf';
+ link.target = '_blank';
+ document.body.appendChild(link);
+ link.click();
+ document.body.removeChild(link);
+ };
+
  const openPdf = (pdf: PdfItem) => {
  setSelectedPdf(pdf);
  };
 
  const closePdf = () => setSelectedPdf(null);
-
- const handleDownload = (pdf: PdfItem) => {
- const link = document.createElement('a');
- link.href = pdf.path;
- link.download = pdf.path.split('/').pop() || pdf.name;
- document.body.appendChild(link);
- link.click();
- document.body.removeChild(link);
- };
 
  const openImageSlider = (item: CatalogItem) => {
  const index = filteredItems.findIndex(i => i.id === item.id);
@@ -371,10 +380,13 @@ export default function Catalog() {
  </div>
  )}
 
+ 
+ 
+
  {/* ===== PDF VIEWER MODAL ===== */}
  {selectedPdf && (
- <div className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4"onClick={closePdf}>
- <div className="relative w-full max-w-5xl h-[90vh] bg-gray-900 overflow-hidden flex flex-col"onClick={(e) => e.stopPropagation()}>
+ <div className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4" onClick={closePdf}>
+ <div className="relative w-full max-w-5xl h-[90vh] bg-gray-900 overflow-hidden flex flex-col" onClick={(e) => e.stopPropagation()}>
  <div className={`flex items-center justify-between px-5 py-3 bg-gray-800 border-b border-gray-700 ${isAr ? 'flex-row-reverse' : ''}`}>
  <div className={`flex items-center gap-3 ${isAr ? 'flex-row-reverse' : ''}`}>
  <FileText className="w-5 h-5 text-red-500"/>
@@ -391,7 +403,12 @@ export default function Catalog() {
  </div>
  </div>
  <div className="flex-1 bg-gray-800">
- <iframe src={selectedPdf.path} className="w-full h-full"title={selectedPdf.name} />
+ <iframe
+ src={selectedPdf.path}
+ className="w-full h-full"
+ title={selectedPdf.name}
+ allow="fullscreen"
+ />
  </div>
  </div>
  </div>
