@@ -137,12 +137,106 @@ const bottomCards = [
  },
 ];
 
+
+
+const hardwareProducts = [
+  {
+    category: 'Hinges',
+    categoryAr: 'المفصلات',
+    items: [
+      {
+        src: '/images/Hinge 110 silver.jpg',
+        title: 'Hinge 110° Silver',
+        titleAr: 'مفصلة 110° فضية',
+        description: 'Premium soft-close hinge with 110° opening angle. Features Blumotion technology for silent and effortless closing. Perfect for standard cabinet doors.',
+        descriptionAr: 'مفصلة فاخرة بإغلاق ناعم وزاوية فتح 110°. تتميز بتقنية Blumotion للإغلاق الصامت والسهل. مثالية لأبواب الخزائن القياسية.',
+      },
+      {
+        src: '/images/Hinge 155 corner.jpg',
+        title: 'Hinge 155° Corner',
+        titleAr: 'مفصلة 155° زاوية',
+        description: 'Wide-angle hinge with 155° opening for corner cabinets and hard-to-reach spaces. Enables full access to cabinet interiors.',
+        descriptionAr: 'مفصلة زاوية واسعة بفتح 155° للخزائن الزاوية والمساحات الصعبة الوصول. تتيح الوصول الكامل لداخل الخزانة.',
+      },
+      {
+        src: '/images/Onyx 110 hinge.jpg',
+        title: 'Onyx 110° Hinge',
+        titleAr: 'مفصلة أونيكس 110°',
+        description: 'Sleek Onyx black finish hinge with integrated soft-close mechanism. Modern aesthetic meets German engineering precision.',
+        descriptionAr: 'مفصلة بلمسة سوداء أنيقة مع آلية إغلاق ناعم مدمجة. جمالية عصرية تلتقي بدقة الهندسة الألمانية.',
+      },
+    ],
+  },
+  {
+    category: 'Drawer Systems',
+    categoryAr: 'أنظمة الأدراج',
+    items: [
+      {
+        src: '/images/Marivo K.jpg',
+        title: 'Marivo K',
+        titleAr: 'ماريفو K',
+        description: 'Elegant bathroom drawer system with smooth glide technology. Water-resistant design ideal for humid environments. Soft-close with full extension.',
+        descriptionAr: 'نظام أدراج أنيق للحمام بتقنية الانزلاق السلس. تصميم مقاوم للماء مثالي للبيئات الرطبة. إغلاق ناعم مع امتداد كامل.',
+      },
+      {
+        src: '/images/Marivo M.jpg',
+        title: 'Marivo M',
+        titleAr: 'ماريفو M',
+        description: 'Versatile kitchen drawer system with high load capacity. Features organized compartment dividers for cutlery and utensils. German craftsmanship.',
+        descriptionAr: 'نظام أدراج متعدد الاستخدامات للمطبخ بقدرة تحميل عالية. يتميز بفواصل منظمة للأدوات والمعلقات. حرفية ألمانية.',
+      },
+      {
+        src: '/images/Marivo N.jpg',
+        title: 'Marivo N',
+        titleAr: 'ماريفو N',
+        description: 'Premium drawer system with integrated LED lighting option. Silent operation with exceptional durability. Perfect for modern kitchen designs.',
+        descriptionAr: 'نظام أدراج فاخر مع خيار إضاءة LED مدمجة. تشغيل صامت بمتانة استثنائية. مثالي للتصاميم العصرية.',
+      },
+    ],
+  },
+  {
+    category: 'Tandembox',
+    categoryAr: 'تاندامبوكس',
+    items: [
+      {
+        src: '/images/Tandembox plus D.jpg',
+        title: 'Tandembox Plus D',
+        titleAr: 'تاندامبوكس بلس D',
+        description: 'Flagship drawer side system with sleek metal design. High stability with elegant thin sides. Full extension and soft-close as standard.',
+        descriptionAr: 'نظام جانبي أدراج رائد بتصميم معدني أنيق. استقرار عالي بجوانب رفيعة أنيقة. امتداد كامل وإغلاق ناعم كمعيار.',
+      },
+      {
+        src: '/images/Tandembox plus D front fixing.jpg',
+        title: 'Front Fixing System',
+        titleAr: 'نظام تثبيت الواجهة',
+        description: 'Innovative front panel fixing mechanism for Tandembox. Tool-free adjustment with precise alignment. Quick and secure installation.',
+        descriptionAr: 'آلية تثبيت لوحة أمامية مبتكرة لتاندامبوكس. ضبط دقيق بدون أدوات. تركيب سريع وآمن.',
+      },
+      {
+        src: '/images/Tandembox plus D front setting.jpg',
+        title: 'Front Setting',
+        titleAr: 'ضبط الواجهة',
+        description: 'Three-dimensional front adjustment system. Height, side, and depth alignment for perfect door fitting. Professional-grade precision.',
+        descriptionAr: 'نظام ضبط أمامي ثلاثي الأبعاد. محاذاة الارتفاع والجانب والعمق لتناسب الباب المثالي. دقة على مستوى احترافي.',
+      },
+      {
+        src: '/images/Tandembox plus D stablizer.jpg',
+        title: 'Stabilizer',
+        titleAr: 'المثبت',
+        description: 'Rear stabilizer for enhanced drawer stability and load distribution. Prevents tipping even with heavy contents. Essential for tall drawers.',
+        descriptionAr: 'مثبت خلفي لاستقرار محسن وتوزيع الحمل للأدراج. يمنع الانقلاب حتى مع المحتويات الثقيلة. ضروري للأدراج الطويلة.',
+      },
+    ],
+  },
+];
+
 export default function Home() {
  const { language, dir } = useLanguage();
  const isAr = language === 'ar';
 
  const [selectedImage, setSelectedImage] = useState<ShowcaseItem | null>(null);
  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+ const [activeHardwareCategory, setActiveHardwareCategory] = useState<string>('Hinges');
  const videoRef = useRef<HTMLVideoElement>(null);
 
  const openImageSlider = (item: ShowcaseItem) => {
@@ -414,6 +508,72 @@ export default function Home() {
  </div>
  ))}
  </div>
+ </div>
+ </section>
+
+ {/* ===== HARDWARE & ACCESSORIES ===== */}
+ <section className="py-16 sm:py-24 bg-white">
+ <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+ <div className={`mb-12 ${isAr ? 'text-right' : 'text-left'}`}>
+ <p className="text-[#87C24D] text-sm font-semibold uppercase tracking-wider mb-3">
+ {isAr ? 'جودة ألمانية' : 'German Quality'}
+ </p>
+ <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+ {isAr ? 'المفصلات والأدراج والتجهيزات' : 'Hinges, Drawers & Fittings'}
+ </h2>
+ <p className="text-gray-600 max-w-2xl">
+ {isAr
+ ? 'اكتشف تشكيلتنا من التجهيزات الداخلية عالية الجودة من Blum وأفضل العلامات التجارية الألمانية.'
+ : 'Discover our range of premium interior fittings from Blum and leading German brands.'}
+ </p>
+ </div>
+
+ {/* Category Tabs */}
+ <div className={`flex flex-wrap gap-2 mb-10 ${isAr ? 'justify-end' : 'justify-start'}`}>
+ {hardwareProducts.map((cat) => (
+ <button
+ key={cat.category}
+ onClick={() => setActiveHardwareCategory(cat.category)}
+ className={`px-6 py-2.5 text-sm font-medium transition-all duration-200 ${
+ activeHardwareCategory === cat.category
+ ? 'bg-[#237357] text-white'
+ : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+ }`}
+ >
+ {isAr ? cat.categoryAr : cat.category}
+ </button>
+ ))}
+ </div>
+
+ {/* Products Grid */}
+ {hardwareProducts.map((cat) => (
+ activeHardwareCategory === cat.category && (
+ <div key={cat.category} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+ {cat.items.map((item, idx) => (
+ <div key={idx} className="group bg-gray-50 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+ <div className="aspect-[4/3] overflow-hidden bg-white">
+ <img
+ src={item.src}
+ alt={isAr ? item.titleAr : item.title}
+ className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+ />
+ </div>
+ <div className={`p-5 ${isAr ? 'text-right' : 'text-left'}`}>
+ <span className="text-[#237357] text-xs font-semibold uppercase tracking-wide">
+ {isAr ? cat.categoryAr : cat.category}
+ </span>
+ <h3 className="text-lg font-bold text-gray-900 mt-1 mb-2">
+ {isAr ? item.titleAr : item.title}
+ </h3>
+ <p className="text-gray-600 text-sm leading-relaxed">
+ {isAr ? item.descriptionAr : item.description}
+ </p>
+ </div>
+ </div>
+ ))}
+ </div>
+ )
+ ))}
  </div>
  </section>
 
