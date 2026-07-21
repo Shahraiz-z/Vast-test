@@ -175,7 +175,6 @@ export default function Navbar() {
           <div className="flex-1 overflow-y-auto px-4 py-4">
             <div className="flex flex-col">
               {navLinks.map((link) => {
-                const isExpanded = expandedSections.includes(link.label);
                 return (
                   <div key={link.path} className="border-b border-gray-100">
                     <button
