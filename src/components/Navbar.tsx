@@ -10,7 +10,6 @@ export default function Navbar() {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +21,6 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setExpandedSections([]);
   }, [location.pathname]);
 
   // Prevent body scroll when menu is open
@@ -36,14 +34,6 @@ export default function Navbar() {
       document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
-
-  const toggleSection = (title: string) => {
-    setExpandedSections(prev => 
-      prev.includes(title) 
-        ? prev.filter(s => s !== title)
-        : [...prev, title]
-    );
-  };
 
   // Same nav links as before - no changes to buttons
   const navLinks = [
@@ -177,21 +167,19 @@ export default function Navbar() {
               {navLinks.map((link) => {
                 return (
                   <div key={link.path} className="border-b border-gray-100">
-                    <button
-                      onClick={() => toggleSection(link.label)}
-                      className="w-full flex items-center justify-between py-3 text-left"
-                    >
-                      <Link
-                        to={link.path}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`text-lg font-semibold ${
-                          isActive(link.path) ? 'text-[#237357] underline underline-offset-4 decoration-2' : 'text-gray-900'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                      
-                    </button>
+                    <div className="w-full flex items-center justify-between py-3 text-left">
+  <Link
+    to={link.path}
+    onClick={() => setIsMobileMenuOpen(false)}
+    className={`text-lg font-semibold ${
+      isActive(link.path)
+        ? 'text-[#237357] underline underline-offset-4 decoration-2'
+        : 'text-gray-900'
+    }`}
+  >
+    {link.label}
+  </Link>
+</div>
                   </div>
                 );
               })}
