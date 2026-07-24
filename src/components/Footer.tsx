@@ -1,48 +1,56 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { translations } from '@/translations';
 
 export default function Footer() {
   const { language } = useLanguage();
-  const t = translations[language];
   const isAr = language === 'ar';
 
   const quickLinks = [
-    { path: '/', label: t.nav.home },
-    { path: '/about', label: t.nav.about },
-    { path: '/services', label: t.nav.services },
-    { path: '/catalog', label: t.nav.catalog },
-    { path: '/contact', label: t.nav.contact },
+    { path: '/', label: isAr ? 'الرئيسية' : 'Home' },
+    { path: '/about', label: isAr ? 'من نحن' : 'About' },
+    { path: '/services', label: isAr ? 'خدماتنا' : 'Services' },
+    { path: '/catalog', label: isAr ? 'الكتالوج' : 'Catalog' },
+    { path: '/contact', label: isAr ? 'تواصل معنا' : 'Contact' },
+  ];
+
+  const services = [
+    isAr ? 'الاستشارات الفنية' : 'Technical Consultancy',
+    isAr ? 'التصميم' : 'Designing',
+    isAr ? 'الإنتاج' : 'Production',
+    isAr ? 'التركيب' : 'Installation',
+    isAr ? 'الصيانة السنوية' : 'Annual Maintenance',
   ];
 
   return (
-    <footer className="bg-[#237357] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ${isAr ? 'lg:text-right' : 'lg:text-left'}`}>
+    <footer className="bg-[#0f2e22] text-white">
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 ${isAr ? 'lg:text-right' : 'lg:text-left'}`}>
           {/* Company Info */}
           <div className={isAr ? 'text-right' : 'text-left'}>
             <img
               src="/images/logo.png"
               alt="VastHome"
-              className={`h-12 w-auto mb-4 brightness-0 invert ${isAr ? 'mr-0 ml-auto' : ''}`}
+              className={`h-10 w-auto mb-6 brightness-0 invert opacity-90 ${isAr ? 'mr-0 ml-auto' : ''}`}
             />
-            <p className="text-white/80 text-sm leading-relaxed">
-              {t.footer.tagline}
+            <p className="text-white/40 text-sm leading-relaxed">
+              {isAr
+                ? 'حلول تصميم داخلي فاخرة تجمع بين الهندسة الدقيقة والإبداع البصري. منذ أكثر من عشر سنوات، نحول المساحات إلى تجارب معيشية استثنائية.'
+                : 'Premium interior design solutions that blend precise engineering with visual creativity. For over a decade, we transform spaces into extraordinary living experiences.'}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className={isAr ? 'text-right' : 'text-left'}>
-            <h3 className="text-lg font-semibold mb-4 text-[#87C24D]">
-              {t.footer.quickLinks}
+            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[#87C24D] mb-6">
+              {isAr ? 'روابط سريعة' : 'Quick Links'}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-white/80 hover:text-white text-sm transition-colors duration-200"
+                    className="text-white/50 hover:text-white text-sm transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -53,13 +61,13 @@ export default function Footer() {
 
           {/* Services */}
           <div className={isAr ? 'text-right' : 'text-left'}>
-            <h3 className="text-lg font-semibold mb-4 text-[#87C24D]">
-              {t.footer.services}
+            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[#87C24D] mb-6">
+              {isAr ? 'خدماتنا' : 'Services'}
             </h3>
-            <ul className="space-y-2">
-              {t.footer.serviceLinks.map((service, index) => (
+            <ul className="space-y-3">
+              {services.map((service, index) => (
                 <li key={index}>
-                  <span className="text-white/80 text-sm">{service}</span>
+                  <span className="text-white/50 text-sm">{service}</span>
                 </li>
               ))}
             </ul>
@@ -67,42 +75,48 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className={isAr ? 'text-right' : 'text-left'}>
-            <h3 className="text-lg font-semibold mb-4 text-[#87C24D]">
-              {t.footer.contact}
+            <h3 className="text-xs font-medium uppercase tracking-[0.2em] text-[#87C24D] mb-6">
+              {isAr ? 'تواصل معنا' : 'Get in Touch'}
             </h3>
-            <ul className="space-y-3">
-              <li className={`flex items-start gap-3 ${isAr ? 'flex-row-reverse' : ''}`}>
-                <MapPin className="w-4 h-4 text-[#87C24D] mt-0.5 flex-shrink-0" />
-                <span className="text-white/80 text-sm">
-                  {t.contact.info.addressValue}
-                </span>
-              </li>
-              <li className={`flex items-center gap-3 ${isAr ? 'flex-row-reverse' : ''}`}>
-                <Phone className="w-4 h-4 text-[#87C24D] flex-shrink-0" />
-                <span className="text-white/80 text-sm">
-                  {t.contact.info.phoneValue}
-                </span>
-              </li>
-              <li className={`flex items-center gap-3 ${isAr ? 'flex-row-reverse' : ''}`}>
-                <Mail className="w-4 h-4 text-[#87C24D] flex-shrink-0" />
-                <span className="text-white/80 text-sm">
-                  {t.contact.info.emailValue}
-                </span>
-              </li>
-              <li className={`flex items-start gap-3 ${isAr ? 'flex-row-reverse' : ''}`}>
-                <Clock className="w-4 h-4 text-[#87C24D] mt-0.5 flex-shrink-0" />
-                <span className="text-white/80 text-sm">
-                  {t.contact.info.hoursValue}
-                </span>
-              </li>
-            </ul>
+            <div className="space-y-4">
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-[0.15em] mb-1">
+                  {isAr ? 'العنوان' : 'Address'}
+                </p>
+                <p className="text-white/60 text-sm">
+                  {isAr ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Kingdom of Saudi Arabia'}
+                </p>
+              </div>
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-[0.15em] mb-1">
+                  {isAr ? 'الهاتف' : 'Phone'}
+                </p>
+                <p className="text-white/60 text-sm">+966 50 000 0000</p>
+              </div>
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-[0.15em] mb-1">
+                  {isAr ? 'البريد الإلكتروني' : 'Email'}
+                </p>
+                <p className="text-white/60 text-sm">info@vasthome.com.sa</p>
+              </div>
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-[0.15em] mb-1">
+                  {isAr ? 'ساعات العمل' : 'Working Hours'}
+                </p>
+                <p className="text-white/60 text-sm">
+                  {isAr ? 'السبت - الخميس: 9 ص - 6 م' : 'Sat - Thu: 9 AM - 6 PM'}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-10 pt-6 border-t border-white/20 text-center">
-          <p className="text-white/60 text-sm">
-            &copy; {new Date().getFullYear()} {t.footer.company}. {t.footer.copyright}
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <p className="text-white/30 text-xs text-center tracking-wide">
+            &copy; {new Date().getFullYear()} VastHome. {isAr ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}
           </p>
         </div>
       </div>

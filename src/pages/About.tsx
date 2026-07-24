@@ -1,151 +1,214 @@
-import { Award, Heart, Lightbulb, Shield } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { translations } from '@/translations';
 
 export default function About() {
- const { language, dir } = useLanguage();
- const t = translations[language];
- const isAr = language === 'ar';
+  const { language, dir } = useLanguage();
+  const isAr = language === 'ar';
 
- const values = [
- { icon: Lightbulb, ...t.about.values.items[0] },
- { icon: Shield, ...t.about.values.items[1] },
- { icon: Heart, ...t.about.values.items[2] },
- { icon: Award, ...t.about.values.items[3] },
- ];
+  const storyParagraphs = isAr
+    ? [
+        'تأسست شركة VastHome على قناعة راسخة بأن كل مساحة تستحق أن تكون انعكاساً حقيقياً لشخصية من يعيش فيها. منذ أكثر من عشر سنوات، نعمل على تحويل المساحات العادية إلى تجارب معيشية استثنائية.',
+        'نحن لا نصنع مجرد أثاث — نصنع بيئات. بيئات تُحسَس وتُعاش. من المطابخ التي تجمع العائلة، إلى خزائن الملابس التي تعكس الذوق الشخصي، كل قطعة ننتجها تحمل بصمتنا في الدقة والإتقان.',
+        'فريقنا يجمع بين الخبرة الهندسية العميقة والحساسية التصميمية الدقيقة. نؤمن بأن الجمال الحقيقي يكمن في التفاصيل، وأن الجودة ليست خياراً بل معياراً لا نحيد عنه.',
+      ]
+    : [
+        'VastHome was founded on the firm belief that every space deserves to be a true reflection of those who inhabit it. For over a decade, we have been transforming ordinary spaces into extraordinary living experiences.',
+        'We do not merely manufacture furniture — we craft environments. Environments that are felt and lived. From kitchens that bring families together, to wardrobes that reflect personal taste, every piece we produce carries our signature of precision and mastery.',
+        'Our team combines deep engineering expertise with refined design sensibility. We believe true beauty lies in the details, and that quality is not a choice but a standard we never compromise.',
+      ];
 
- const stats = t.about.stats.items;
+  const values = [
+    {
+      title: isAr ? 'الابتكار' : 'Innovation',
+      description: isAr
+        ? 'نستكشف باستمرار حدود التصميم والتقنية لتقديم حلول تتجاوز التوقعات.'
+        : 'We continuously explore the boundaries of design and technology to deliver solutions that exceed expectations.',
+    },
+    {
+      title: isAr ? 'النزاهة' : 'Integrity',
+      description: isAr
+        ? 'الشفافية والأمانة في كل تفاعل، من أول لقاء إلى التسليم النهائي.'
+        : 'Transparency and honesty in every interaction, from the first meeting to final handover.',
+    },
+    {
+      title: isAr ? 'الشغف' : 'Passion',
+      description: isAr
+        ? 'نحب ما نفعله، ويظهر ذلك في كل تفصيل من تفاصيل عملنا.'
+        : 'We love what we do, and it shows in every detail of our work.',
+    },
+    {
+      title: isAr ? 'التميز' : 'Excellence',
+      description: isAr
+        ? 'نرفض المقاييس المتوسطة. كل مشروع هو فرصة لتحقيق شيء استثنائي.'
+        : 'We reject mediocrity. Every project is an opportunity to achieve something exceptional.',
+    },
+  ];
 
- return (
- <div className={`${isAr ? 'font-arabic' : ''}`} dir={dir}>
- {/* Hero Section */}
- <section className="relative pt-24 pb-12 overflow-hidden">
- <div 
- className="absolute inset-0"
- style={{
- background: 'linear-gradient(to bottom, #ffffff 0%, #ffffff 30%, #237357 30%, #1a5a43 100%)'
- }}
- />
- <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
- <div className={`${isAr ? 'text-right' : 'text-left'}`}>
- <p className="text-[#87C24D] text-sm font-semibold uppercase tracking-wider mb-3">
- {isAr ? 'من نحن' : 'About Us'}
- </p>
- <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
- {t.about.hero.title}
- </h1>
- <p className="text-lg text-white/80 max-w-2xl">
- {t.about.hero.subtitle}
- </p>
- </div>
- </div>
- </section>
+  const stats = [
+    { number: '10+', label: isAr ? 'سنوات الخبرة' : 'Years Experience' },
+    { number: '500+', label: isAr ? 'مشروع منجز' : 'Projects Completed' },
+    { number: '50+', label: isAr ? 'خبير وفني' : 'Experts & Technicians' },
+    { number: '98%', label: isAr ? 'نسبة رضا العملاء' : 'Client Satisfaction' },
+  ];
 
- {/* Story Section */}
- <section className="py-20 bg-white">
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
- <div className={`grid lg:grid-cols-2 gap-12 items-center`}>
- <div className={isAr ? 'order-2 text-right' : 'order-1 text-left'}>
- <h2 className="text-3xl sm:text-4xl font-bold text-[#237357] mb-6">
- {t.about.story.title}
- </h2>
- <div className="space-y-4">
- {t.about.story.paragraphs.map((paragraph, index) => (
- <p key={index} className="text-gray-600 leading-relaxed">
- {paragraph}
- </p>
- ))}
- </div>
- </div>
- <div className={isAr ? 'order-1' : 'order-2'}>
- <div className="relative">
- <img
- src="/images/kitchen4.jpg"
- alt="VastHome"
- className="shadow-xl w-full h-[400px] object-cover"
- />
- <div className="absolute -bottom-6 -left-6 bg-[#87C24D] p-6 shadow-lg hidden sm:block">
- <p className="text-3xl font-bold text-white">10+</p>
- <p className="text-white/80 text-sm">{isAr ? 'سنوات الخبرة' : 'Years Experience'}</p>
- </div>
- </div>
- </div>
- </div>
- </div>
- </section>
+  return (
+    <div className={`${isAr ? 'font-arabic' : ''}`} dir={dir}>
+      {/* Hero Section */}
+      <section className="relative pt-28 pb-20 overflow-hidden">
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, #ffffff 0%, #ffffff 35%, #1a4d3a 35%, #143d2e 100%)'
+          }}
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`${isAr ? 'text-right' : 'text-left'} max-w-3xl`}>
+            <div className={`flex items-center gap-3 mb-6 ${isAr ? 'flex-row-reverse' : ''}`}>
+              <div className="h-px w-12 bg-[#87C24D]" />
+              <p className="text-[#87C24D] text-sm font-medium uppercase tracking-[0.2em]">
+                {isAr ? 'من نحن' : 'About Us'}
+              </p>
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              {isAr ? 'نصنع المساحات التي تُحسَس' : 'We Craft Spaces That Are Felt'}
+            </h1>
+            <p className="text-lg text-white/70 max-w-xl leading-relaxed">
+              {isAr
+                ? 'أكثر من عشر سنوات من الخبرة في تصميم وتصنيع الأثاث الداخلي الفاخر.'
+                : 'Over a decade of expertise in designing and manufacturing premium interior furniture.'}
+            </p>
+          </div>
+        </div>
+      </section>
 
- {/* Values Section */}
- <section className="py-20 bg-gray-50">
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
- <div className={`text-center mb-14 ${isAr ? 'text-right' : 'text-left'} max-w-2xl mx-auto`}>
- <h2 className="text-3xl sm:text-4xl font-bold text-[#237357] mb-4">
- {t.about.values.title}
- </h2>
- </div>
- <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
- {values.map((value, index) => (
- <div
- key={index}
- className="bg-white p-6 shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100 text-center"
- >
- <div className="w-16 h-16 bg-[#237357]/10 flex items-center justify-center mb-4 mx-auto">
- <value.icon className="w-8 h-8 text-[#237357]" />
- </div>
- <h3 className="text-lg font-semibold text-gray-900 mb-2">
- {value.title}
- </h3>
- <p className="text-gray-600 text-sm leading-relaxed">
- {value.description}
- </p>
- </div>
- ))}
- </div>
- </div>
- </section>
+      {/* Story Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className={isAr ? 'order-2 text-right' : 'order-1 text-left'}>
+              <div className={`flex items-center gap-3 mb-6 ${isAr ? 'flex-row-reverse' : ''}`}>
+                <div className="h-px w-12 bg-[#87C24D]" />
+                <p className="text-[#87C24D] text-sm font-medium uppercase tracking-[0.2em]">
+                  {isAr ? 'قصتنا' : 'Our Story'}
+                </p>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
+                {isAr ? 'فن يجمع بين الهندسة والإحساس' : 'Where Engineering Meets Feeling'}
+              </h2>
+              <div className="space-y-5">
+                {storyParagraphs.map((paragraph, index) => (
+                  <p key={index} className="text-gray-600 leading-relaxed text-[15px]">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div className={isAr ? 'order-1' : 'order-2'}>
+              <div className="relative group">
+                <img
+                  src="/images/kitchen4.jpg"
+                  alt="VastHome"
+                  className="w-full h-[480px] object-cover shadow-xl transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+                <div className="absolute -bottom-6 -left-6 bg-[#0f2e22] p-8 shadow-2xl hidden sm:block">
+                  <p className="text-4xl font-bold text-[#87C24D]">10+</p>
+                  <p className="text-white/60 text-sm mt-1">{isAr ? 'سنوات الخبرة' : 'Years Experience'}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
- {/* Stats Section */}
- <section className="py-20 bg-gradient-to-r from-[#237357] to-[#2d8a6a]">
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
- <div className={`text-center mb-14 ${isAr ? 'text-right' : 'text-left'} max-w-2xl mx-auto`}>
- <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
- {t.about.stats.title}
- </h2>
- </div>
- <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
- {stats.map((stat, index) => (
- <div
- key={index}
- className="bg-white/10 backdrop-blur-sm p-6 text-center border border-white/20"
- >
- <p className="text-4xl font-bold text-[#87C24D] mb-2">{stat.number}</p>
- <p className="text-white/80 text-sm">{stat.label}</p>
- </div>
- ))}
- </div>
- </div>
- </section>
+      {/* Values Section */}
+      <section className="py-24 bg-[#fafbfa]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`mb-16 ${isAr ? 'text-right' : 'text-left'}`}>
+            <div className={`flex items-center gap-3 mb-4 ${isAr ? 'flex-row-reverse' : ''}`}>
+              <div className="h-px w-12 bg-[#87C24D]" />
+              <p className="text-[#87C24D] text-sm font-medium uppercase tracking-[0.2em]">
+                {isAr ? 'قيمنا' : 'Our Values'}
+              </p>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+              {isAr ? 'ما نؤمن به' : 'What We Stand For'}
+            </h2>
+          </div>
 
- {/* Team Image Section */}
- <section className="py-20 bg-white">
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
- <div className="grid lg:grid-cols-2 gap-8">
- <div className="overflow-hidden shadow-xl">
- <img
- src="/images/kitchen5.jpg"
- alt="VastHome Work"
- className="w-full h-[300px] object-cover"
- />
- </div>
- <div className="overflow-hidden shadow-xl">
- <img
- src="/images/kitchen6.jpg"
- alt="VastHome Work"
- className="w-full h-[300px] object-cover"
- />
- </div>
- </div>
- </div>
- </section>
- </div>
- );
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200">
+            {values.map((value, index) => (
+              <div
+                key={index}
+                className="bg-[#fafbfa] p-10 group hover:bg-white transition-all duration-500"
+              >
+                <div className={`${isAr ? 'text-right' : 'text-left'}`}>
+                  <span className="text-5xl font-bold text-[#237357]/10 group-hover:text-[#237357]/15 transition-colors duration-500 select-none">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-xl font-semibold text-gray-900 mt-4 mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-24 bg-[#0f2e22]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`mb-16 ${isAr ? 'text-right' : 'text-left'}`}>
+            <div className={`flex items-center gap-3 mb-4 ${isAr ? 'flex-row-reverse' : ''}`}>
+              <div className="h-px w-12 bg-[#87C24D]" />
+              <p className="text-[#87C24D] text-sm font-medium uppercase tracking-[0.2em]">
+                {isAr ? 'أرقامنا' : 'By The Numbers'}
+              </p>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+              {isAr ? 'ثقة تُبنى بالنتائج' : 'Trust Built on Results'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-[#0f2e22] p-10 group hover:bg-[#143d2e] transition-colors duration-500"
+              >
+                <div className={`${isAr ? 'text-right' : 'text-left'}`}>
+                  <p className="text-5xl font-bold text-[#87C24D] mb-3">{stat.number}</p>
+                  <p className="text-white/50 text-sm">{stat.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-4">
+            <div className="overflow-hidden group">
+              <img
+                src="/images/kitchen5.jpg"
+                alt="VastHome Work"
+                className="w-full h-[350px] object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="overflow-hidden group">
+              <img
+                src="/images/kitchen6.jpg"
+                alt="VastHome Work"
+                className="w-full h-[350px] object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
