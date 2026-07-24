@@ -81,6 +81,24 @@ export default function Contact() {
     },
   ];
 
+  const socialLinks = [
+    {
+      name: 'Facebook',
+      url: 'https://www.facebook.com/vasthome.com.sa',
+      label: isAr ? 'فيسبوك' : 'Facebook',
+    },
+    {
+      name: 'Twitter',
+      url: 'https://twitter.com/vasthome',
+      label: isAr ? 'تويتر' : 'Twitter',
+    },
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/vasthome.com.sa',
+      label: isAr ? 'إنستغرام' : 'Instagram',
+    },
+  ];
+
   return (
     <div className={`${isAr ? 'font-arabic' : ''}`} dir={dir}>
       {/* Hero Section */}
@@ -253,6 +271,40 @@ export default function Contact() {
                       <p className="text-white/40 text-xs uppercase tracking-[0.15em] mb-1">{item.label}</p>
                       <p className="text-white font-medium text-[15px]">{item.value}</p>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Social Media Links */}
+              <div className="mt-4 bg-[#fafbfa] p-8 border border-gray-100">
+                <div className={`mb-6 ${isAr ? 'text-right' : 'text-left'}`}>
+                  <div className={`flex items-center gap-3 mb-3 ${isAr ? 'flex-row-reverse' : ''}`}>
+                    <div className="h-px w-8 bg-[#87C24D]" />
+                    <p className="text-[#87C24D] text-xs font-medium uppercase tracking-[0.2em]">
+                      {isAr ? 'تابعنا' : 'Follow Us'}
+                    </p>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {isAr ? 'تواصل معنا عبر' : 'Connect With Us'}
+                  </h3>
+                </div>
+
+                <div className={`space-y-3 ${isAr ? 'text-right' : 'text-left'}`}>
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between py-3 border-b border-gray-200 last:border-0 hover:border-[#237357]/30 transition-colors duration-300"
+                    >
+                      <span className="text-sm text-gray-600 group-hover:text-[#237357] transition-colors duration-300">
+                        {social.label}
+                      </span>
+                      <span className="text-xs text-gray-400 group-hover:text-[#87C24D] transition-colors duration-300">
+                        {isAr ? 'زيارة' : 'Visit'}
+                      </span>
+                    </a>
                   ))}
                 </div>
               </div>
